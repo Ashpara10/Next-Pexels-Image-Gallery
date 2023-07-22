@@ -45,18 +45,17 @@ export default function Home() {
   ];
 
   return (
-    <main className="w-full flex min-h-screen flex-col items-center justify-between mt-28">
+    <main className="w-full flex min-h-screen flex-col items-center justify-between mt-28 mb-8">
       <div className="w-full max-w-3xl flex flex-col items-center justify-center px-4">
-        <h1 className="text-left text-3xl md:text-4xl font-black ">
-          NextJS Image Gallery
-          <br /> + Pexels Demo
+        <h1 className="text-center my-2 text-3xl md:text-4xl font-black ">
+          NextJS + Pexels <br /> Image Gallery Demo
         </h1>
-        <div className=" my-3 w-full  px-4 flex items-center justify-between ">
+        <div className=" my-3 w-full  px-1 flex items-center justify-between ">
           <input
             ref={SearchRef}
             type="text"
             className="px-3 border dark:border-none border-gray-300 focus-visible:outline-none w-full mx-3 py-2 rounded-md"
-            placeholder="Search for Images ex:Ocean.."
+            placeholder="Search for Images..."
           />
           <button
             onClick={() => {
@@ -72,41 +71,45 @@ export default function Home() {
             )}
           </button>
         </div>
-        <section className="w-full my-8 grid  grid-cols-2 md:grid-cols-3">
-          {data?.photos?.map(
-            ({
-              src,
-              width,
-              id,
-              height,
-              alt,
-            }: {
-              src: any;
-              width: number;
-              id: number;
-              height: number;
-              alt: string;
-            }) => {
-              return (
-                <div
-                  className={` ${
-                    placeHolderColors[
-                      Math.floor(Math.random() * placeHolderColors.length)
-                    ]
-                  } p-0  m-2 hover:scale-105 transition-all hover:shadow-md dark:hover:shadow-none hover:shadow-stone-600  hover:translate-y-2 rounded-2xl`}
-                  key={id}
-                >
-                  <Image
-                    className="rounded-2xl "
-                    alt={alt}
-                    src={src?.portrait}
-                    loading="lazy"
-                    width={width}
-                    height={height}
-                  />
-                </div>
-              );
-            }
+        <section className="w-full min-h-screen my-8 grid  grid-cols-2 md:grid-cols-3">
+          {loading ? (
+            <div className="w-full col-span-2 md:col-span-3 h-full bg-gray-200 dark:bg-glow rounded-xl animate-pulse"></div>
+          ) : (
+            data?.photos?.map(
+              ({
+                src,
+                width,
+                id,
+                height,
+                alt,
+              }: {
+                src: any;
+                width: number;
+                id: number;
+                height: number;
+                alt: string;
+              }) => {
+                return (
+                  <div
+                    className={` ${
+                      placeHolderColors[
+                        Math.floor(Math.random() * placeHolderColors.length)
+                      ]
+                    } p-0  m-2 hover:scale-105 transition-all hover:shadow-md dark:hover:shadow-none hover:shadow-stone-600  hover:translate-y-2 rounded-2xl`}
+                    key={id}
+                  >
+                    <Image
+                      className="rounded-2xl "
+                      alt={alt}
+                      src={src?.portrait}
+                      loading="lazy"
+                      width={width}
+                      height={height}
+                    />
+                  </div>
+                );
+              }
+            )
           )}
         </section>
         <div className="flex w-full items-center justify-between py-2 px-1">
