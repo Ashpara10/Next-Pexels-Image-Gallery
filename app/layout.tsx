@@ -20,15 +20,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <DarkThemeProvider>
-        <body
-          className={`${gro.className} dark:bg-dark transition-all ease-in-out`}
-        >
+      <body
+        className={`${gro.className} dark:bg-dark transition-all ease-in-out`}
+      >
+        <DarkThemeProvider>
           <Header />
           {children}
           <Footer />
-        </body>
-      </DarkThemeProvider>
+        </DarkThemeProvider>
+      </body>
     </html>
   );
 }

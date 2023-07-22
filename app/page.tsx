@@ -9,6 +9,7 @@ import {
   RxMagnifyingGlass,
 } from "react-icons/rx";
 import { VscLoading } from "react-icons/vsc";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [data, setData] = useState<any>();
@@ -18,6 +19,7 @@ export default function Home() {
   const SearchRef = useRef<HTMLInputElement>(null);
   const { setQ } = useQueryStore();
   const q = String(SearchRef?.current?.value);
+  const router = useRouter();
 
   useEffect(() => {
     const getImages = async () => {
@@ -91,6 +93,7 @@ export default function Home() {
               }) => {
                 return (
                   <div
+                    onClick={() => router?.push(`/image/${id}`)}
                     className={` ${
                       placeHolderColors[
                         Math.floor(Math.random() * placeHolderColors.length)
